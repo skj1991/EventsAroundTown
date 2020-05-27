@@ -1,0 +1,14 @@
+<h1><%= @event.name %></h1>
+<img src="<%= @event.images%>" width="450" height="450"/><br>
+
+<h3><a href='<%= @event.event_url %>'> Click Here to for Tickets & SeatMap!</a></h3><br>
+    <p> Info: <%= @event.info %> </p>
+    <p> Date: <%= @event.date %></p>
+    <p> Time: <%= @event.time %></p>
+    <p> Venue: <%= @event.venue %></p>
+    <p> Address: <%= @event.address.split("\"").join("") %></p>
+    <p> Ticket Sales Start Date: <%= @event.sales_start %></p>
+    <p> Ticket Sales End Date: <%= @event.sales_end %></p>
+   
+
+    

@@ -1,0 +1,12 @@
+<h1>Edit User Profile:</h1>
+<h3> Current Username: <%= @user.username %></h3>
+<h3>Current Email Address: <%= @user.email %></h3>
+
+ <form method="post" action="/users/<%= @user.id%>">
+ <input id="hidden" type="hidden" name="_method" value="patch">
+ <input type="text" name="username" placeholder="Update Username..."><br>
+ <input type="email" name="email" placeholder="Update Email Address..."><br>
+
+    <input type="submit" value="Save Edit">
+ </form>
+ 

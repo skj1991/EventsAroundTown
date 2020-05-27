@@ -1,0 +1,6 @@
+<h1>Event Search Results...</h1>
+
+<% @city.each do |event| %>
+    <h2><a href="/event/<%= event.id%>/show"> <%= event.name %> </a></h2>
+    <img src="<%= event.images%>" width="450" height="450"/><br>
+<% end %>

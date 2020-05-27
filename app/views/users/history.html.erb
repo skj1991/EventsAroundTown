@@ -1,0 +1,13 @@
+<h1> Search History: </h1>
+
+<% @history.each do |c| %>
+    <ul>
+     <li>
+      <a href="/events/<%= c.city%>"> <%= c.city %> </a>
+      <form action="/events/<%= c.city%>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete This City">
+      </form>
+     </li>
+    </ul>
+<% end %><br>

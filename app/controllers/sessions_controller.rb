@@ -19,11 +19,11 @@ class SessionsController < ApplicationController
     end
   
     post "/sign-up" do
-      if params["username"].empty? || params["password"].empty? || params["email"].empty?
-        @error = "Please make sure to complete all of the fields within the form to Sign-up successfully!"
+      user = User.new(params)
+      if !user.save
+        @error = user.errors.full_messages.join(" ")
         erb :"/users/signup.html"
       else
-        user = User.create(params)
         session["user_id"] = user.id
         redirect "/search"
       end

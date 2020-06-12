@@ -10,10 +10,10 @@ class EventsController < ApplicationController
   end
 
   post '/search' do
-    
     city = params["city"]
-    c = City.create(city: city, user_id: session["user_id"])
-    results = API.get_events(city) 
+    results = API.get_events(city)
+    if results["_embedded"]
+      c = City.create(city: city, user_id: session["user_id"])
     results["_embedded"]["events"].each do |event|
       name = event["name"]
       images = event["images"][0]["url"]
@@ -30,9 +30,12 @@ class EventsController < ApplicationController
        address << event["_embedded"]["venues"][0]["address"]["line1"] << event["_embedded"]["venues"][0]["city"]["name"] << event["_embedded"]["venues"][0]["state"]["stateCode"] << event["_embedded"]["venues"][0]["postalCode"]
        city_id = c.id
        @event = Event.create(name: name, images: images, event_url: event_url, info: info,  sales_start: sales_start, sales_end: sales_end, price_max: price_max, price_min: price_min, date: date, time: time, venue: venue, address: address, city_id: city_id) 
+      end
+      redirect to "/events/#{city}"
+    else
+      @error = "City is not found. Please check the spelling and try again."
+      erb :"/events/search.html"
     end
-
-    redirect to "/events/#{city}"
   end
 
   get "/events/:city" do
